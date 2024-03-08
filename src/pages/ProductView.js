@@ -1,5 +1,18 @@
 import React, { useState, useEffect, useContext } from 'react';
-import {TextField, Button, Typography, Container, Card, CardContent, CardMedia, Grid, Breadcrumbs, Link as MuiLink, InputAdornment, IconButton} from '@mui/material';
+import {
+  TextField,
+  Button,
+  Typography,
+  Container,
+  Card,
+  CardContent,
+  CardMedia,
+  Grid,
+  Breadcrumbs,
+  Link as MuiLink,
+  InputAdornment,
+  IconButton,
+} from '@mui/material';
 import { Link as RouterLink, useNavigate, useParams } from 'react-router-dom';
 import UserContext from '../UserContext';
 import Swal from 'sweetalert2';
@@ -89,73 +102,73 @@ export default function ProductView() {
                     </Breadcrumbs>
                 </Grid>
                 <br /><br />
-                <Grid item lg={6}>
-                    <Card>
-                        <CardMedia
-                            component="img"
-                            src={image}
-                            alt={name}
-                            style={{ width: '100%', height: 'auto' }}
-                        />
-                        <CardContent className="text-center">
-                            <Typography variant="h5">{name}</Typography>
-                            <br/>
-                            <Typography variant="subtitle1">Description:</Typography>
-                            <Typography variant="body1">{description}</Typography>
-                            <br/>
-                            <Typography variant="subtitle1">Price:</Typography>
-                            <Typography variant="body1">&#8369;{Number(totalPrice).toLocaleString()}.00</Typography>
-                            <br/>
-                            <Grid container alignItems="center" justifyContent="center">
-                                <Grid item>
-                                    <IconButton onClick={handleIncrement} aria-label="Increase Quantity">
-                                        <AddIcon />
-                                    </IconButton>
-                                </Grid>
-                                <Grid item>
-                                    <TextField
-                                        id="quantity"
-                                        label="Quantity"
-                                        type="number"
-                                        value={quantity}
-                                        InputProps={{
-                                            inputProps: { min: 1 }
-                                        }}
-                                        fullWidth
-                                        readOnly
-                                    />
-                                </Grid>
-                                <Grid item>
-                                    <IconButton onClick={handleDecrement} aria-label="Decrease Quantity">
-                                        <RemoveIcon />
-                                    </IconButton>
-                                </Grid>
-                            </Grid>
-                            <br /><br />
-                            {user.id !== null ? (
-                                <Button
-                                    variant="contained"
-                                    color="primary"
-                                    onClick={() => addToCart(productId)}
-                                    fullWidth
-                                >
-                                    Add to Cart
-                                </Button>
-                            ) : (
-                                <MuiLink>
-                                    <Button
-                                        component={RouterLink}
-                                        to="/login"
-                                        variant="contained"
-                                        color="error"
-                                        fullWidth
-                                    >
-                                        Login to Continue Shopping
-                                    </Button>
-                                </MuiLink>
-                            )}
-                        </CardContent>
-                    </Card>
+                <Grid item xs={12} sm={8} md={6} lg={6}>
+                  <Card>
+                    <CardMedia
+                      component="img"
+                      src={image}
+                      alt={name}
+                      style={{ width: '100%', height: 'auto' }}
+                    />
+                    <CardContent className="text-center">
+                      <Typography variant="h5">{name}</Typography>
+                      <br />
+                      <Typography variant="subtitle1">Description:</Typography>
+                      <Typography variant="body1">{description}</Typography>
+                      <br />
+                      <Typography variant="subtitle1">Price:</Typography>
+                      <Typography variant="body1">&#8369;{Number(totalPrice).toLocaleString()}.00</Typography>
+                      <br />
+                      <Grid container alignItems="center" justifyContent="center">
+                        <Grid item>
+                          <IconButton onClick={handleIncrement} aria-label="Increase Quantity">
+                            <AddIcon />
+                          </IconButton>
+                        </Grid>
+                        <Grid item>
+                          <TextField
+                            id="quantity"
+                            label="Quantity"
+                            type="number"
+                            value={quantity}
+                            InputProps={{
+                              inputProps: { min: 1 },
+                            }}
+                            fullWidth
+                            readOnly
+                          />
+                        </Grid>
+                        <Grid item>
+                          <IconButton onClick={handleDecrement} aria-label="Decrease Quantity">
+                            <RemoveIcon />
+                          </IconButton>
+                        </Grid>
+                      </Grid>
+                      <br /><br />
+                      {user.id !== null ? (
+                        <Button
+                          variant="contained"
+                          color="primary"
+                          onClick={() => addToCart(productId)}
+                          fullWidth
+                        >
+                          Add to Cart
+                        </Button>
+                      ) : (
+                        <MuiLink>
+                          <Button
+                            component={RouterLink}
+                            to="/login"
+                            variant="contained"
+                            color="error"
+                            fullWidth
+                          >
+                            Login to Continue Shopping
+                          </Button>
+                        </MuiLink>
+                      )}
+                    </CardContent>
+                  </Card>
                 </Grid>
             </Grid>
         </Container>
