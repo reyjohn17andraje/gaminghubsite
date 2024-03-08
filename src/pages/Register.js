@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import {TextField, Button, Typography, Container, FormControl, InputLabel, Input, FormHelperText, Paper, Link as MuiLink} from '@mui/material';
+import { TextField, Button, Typography, Container, FormControl, InputLabel, Input, FormHelperText, Paper, Link as MuiLink } from '@mui/material';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import UserContext from '../UserContext';
@@ -17,6 +17,13 @@ export default function Register() {
     const [isActive, setIsActive] = useState(false);
     const [error, setError] = useState('');
     const navigate = useNavigate();
+
+    const setFormattedMobileNo = (input) => {
+        const numericInput = input.replace(/\D/g, '');
+        const formattedMobileNo =
+            numericInput.length > 10 ? `+63${numericInput.slice(-10)}` : `+63${numericInput}`;
+        setMobileNo(formattedMobileNo);
+    };
 
     const registerUser = async (e) => {
         e.preventDefault();
@@ -53,7 +60,7 @@ export default function Register() {
                     title: 'Registration successful',
                     confirmButtonColor: '#3085d6',
                     confirmButtonText: 'OK',
-                })
+                });
                 navigate('/products');
             } else if (data.error === 'Email invalid') {
                 setError('Email is invalid');
@@ -103,7 +110,17 @@ export default function Register() {
 
     return (
         <Container component="main" maxWidth="xs">
-            <Paper elevation={3} style={{ padding: '20px', marginTop: '50px', textAlign: 'center', fontFamily: 'monospace', fontWeight: 700, letterSpacing: '.3rem' }}>
+            <Paper
+                elevation={3}
+                style={{
+                    padding: '20px',
+                    marginTop: '50px',
+                    textAlign: 'center',
+                    fontFamily: 'monospace',
+                    fontWeight: 700,
+                    letterSpacing: '.3rem',
+                }}
+            >
                 {user.id !== null ? (
                     <Link to="/products">
                         <Typography variant="h4" align="center" gutterBottom>
@@ -152,11 +169,11 @@ export default function Register() {
                             <InputLabel htmlFor="mobileNo">Mobile No</InputLabel>
                             <Input
                                 id="mobileNo"
-                                type="number"
-                                placeholder="Enter 11 Digit No."
+                                type="tel"
+                                placeholder="Enter 10 Digit No."
                                 required
                                 value={mobileNo}
-                                onChange={(e) => setMobileNo(e.target.value)}
+                                onChange={(e) => setFormattedMobileNo(e.target.value)}
                             />
                         </FormControl>
                         <FormControl fullWidth margin="normal">
@@ -237,4 +254,4 @@ export default function Register() {
             </Paper>
         </Container>
     );
-}
+};

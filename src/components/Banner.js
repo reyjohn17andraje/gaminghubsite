@@ -77,7 +77,7 @@ export default function Banner({ data }) {
                                             <img
 											    src={product.src}
 											    alt={product.name}
-											    style={{ flex: 1, width: '100%', height: '100%', objectFit: 'cover', cursor: 'pointer' }}
+											    style={{ flex: 1, width: '100%', height: '100%', objectFit: 'contain', cursor: 'pointer' }}
 											    onClick={() => handleProductClick(product._id)}
 											/>
                                         </div>
